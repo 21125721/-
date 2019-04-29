@@ -13,16 +13,18 @@ import org.stu.Data.Dbconnection;
 import org.stu.forout.Forout;
 import org.stu.mainui.Mainui;
 import org.stu.students.Students;
-
+/**
+ *查询学生的UI
+ */
 
 public class Stuinfoui {
 	static Connection conn = null;
 	static Scanner scan = new Scanner(System.in);
 	public static void Stuinfoui() throws Exception {
 		long begintime = new Date().getTime();
-		Forout.ForOut(12);
+		Forout.ForOut(13);
 		Forout.stuprin();
-		Forout.ForOut(12);
+		Forout.ForOut(13);
 		System.out.print("\n||\t\t 1、所有学生\t\t||");
 		System.out.print("\n||\t\t 2、查询学生\t\t||");
 		System.out.print("\n||\t\t 3、返回上级\t\t||");
@@ -52,8 +54,12 @@ public class Stuinfoui {
 				PreparedStatement pstat = conn.prepareStatement(sql);
 				boolean flag = pstat.execute();
 				if(flag) {
-					System.out.println("学号\t姓名\t性别\t年龄\t手机号\t");
-					/*while(rs.next()) {
+					Forout.ForOut(13);
+					Forout.stuprin();
+					Forout.ForOut(13);
+					System.out.println("\n|| 学号\t姓名\t性别     年龄  手机号"
+							+ "\t\t||");
+					/*while(rs.next()) { 
 						String sex = "";
 						if(rs.getInt("sex")==1) {
 							sex="男";
@@ -72,7 +78,8 @@ public class Stuinfoui {
 					for(Students st:list) {
 						System.out.println(st.toString());
 					}
-					System.out.println("打印完成,按任意键返回上一级");
+					Forout.ForOut(42);
+					System.out.println("\n打印完成,按任意键返回上一级");
 					String sc = scan.nextLine();
 					if("".equals(sc)) {
 						Stuinfoui();

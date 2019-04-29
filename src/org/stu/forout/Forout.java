@@ -5,7 +5,10 @@ package org.stu.forout;
  *
  */
 public class Forout {
-	//循环输出=，外边框
+	/**
+	 * 循环输出=，外边框
+	 *
+	 */
 		public static void ForOut(int index) throws  InterruptedException {
 			for(int i=0;i<index;i++) {	
 				System.out.print("=");
@@ -15,9 +18,6 @@ public class Forout {
 		public static void ForOut(int index,int n) throws  InterruptedException {
 			for(int i=0;i<index;i++) {	
 				System.out.print("=");
-				/*Robot Sleep = new Robot();
-				Sleep.delay(100);*/
-				
 				Thread.currentThread().sleep(n);
 			}
 		}

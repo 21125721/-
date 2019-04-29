@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.stu.forout.Forout;
+/**
+ *查询学生数据 
+ */
 public class Selectstu {
 	public static void selectstu(){
 		Scanner scan = new Scanner(System.in);
@@ -26,22 +30,30 @@ public class Selectstu {
 					boolean flag = pstat.execute();
 					ResultSet rs = pstat.getResultSet();
 					if(flag){
+						Forout.ForOut(13);
+						Forout.stuprin();
+						Forout.ForOut(13);
+						System.out.println("\n|| 学号\t姓名\t性别     "
+								+ "年龄      手机号            "
+								+ "||");
 						if(rs.next()){
-							System.out.println("学号:"+rs.getInt("stucode")+"\t"+
-												"姓名:"+rs.getString("name")+"\t"+
-												"性别"+rs.getString("sex")+"\t"+
-												"年龄:"+rs.getInt("age")+"\t"+
-												"手机号"+rs.getString("phoneid"));
+							System.out.println("||  "+rs.getInt("stucode")+"\t"
+													+rs.getString("name")+"\t"
+													+rs.getString("sex")+"         "
+													+rs.getInt("age")+"   "
+													+rs.getString("phoneid")+"  ||");
 						}else {
 							System.out.println("没有数据");
 							r = true;
 						}
 					}else {
+						Forout.ForOut(42);
 						System.out.println("没有这个学生,请重新输入");
 						r = true;
 					}
 				}while(r);
-				System.out.println("打印完成,按任意键返回上一级");
+				Forout.ForOut(42);
+				System.out.println("\n打印完成,按任意键返回上一级");
 				String sc = scan.nextLine();
 				if("".equals(sc)) {
 					Stuinfoui.Stuinfoui();

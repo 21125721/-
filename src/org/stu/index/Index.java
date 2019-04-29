@@ -2,31 +2,23 @@ package org.stu.index;
 
 
 import java.io.File;
-import java.io.IOException;
 
 import org.stu.mainui.Mainui;
+import org.stu.scoreinfo.Allscore;
+import org.stu.scoreinfo.Selectscore;
+import org.stu.scoreinfo.UpdateScore;
 import org.stu.stuinfo.Addstuinfo;
-import org.stu.stuinfo.Selectstu;
-import org.stu.stuinfo.Updatestu;
-
-
+import org.stu.stuinfo.Deletestu;
 
 /**
- * 入口
- * @author zcy12
+ * 程序的入口
  *
  */
 public class Index {
-	
-		static File f = null;
+	static File f = null;
 	public static void main(String[] args) throws Exception {
-		//初始化账号密码
-		//Userdata.Initialize();
 		//调用登陆方法
 		Mainui.login();
-		//Updatestu.update();
-//		Selectstu.selectstu();
-		//Addstuinfo.addstuinfo();
 	}
 	
 	

@@ -1,10 +1,12 @@
 package org.stu.stuinfo;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 import org.stu.Data.Dbconnection;
+import org.stu.mainui.Mainui;
+import org.stu.score.Score;
+import org.stu.scoreinfo.AddScore;
 import org.stu.students.Students;
 
 public class Addstuinfo{
@@ -19,13 +21,14 @@ public class Addstuinfo{
 		String sex = ""; 
 		int age = 0;
 		String phoneid = "";
+		String one = "";
 		try {
 			conn = Dbconnection.getConnection();
 			if(conn == null) {
 				System.out.println("获取失败");
 			}else {
-				String sql = "insert into stu(name,sex,age,phoneid) values(?,?,?,?)";
-				PreparedStatement pstat = conn.prepareStatement(sql);
+				//定义插入数据的sql语句
+				String sql = "insert into stu(`name`,`sex`,`age`,`phoneid`) values(?,?,?,?)";
 				do {
 					flag = false;
 					System.out.println("请输入姓名:");
@@ -33,21 +36,15 @@ public class Addstuinfo{
 					if("".trim().equals(name)) {
 						System.out.println("姓名不能为空, 请重新输入");
 						flag = true;
-					}else {
-//						pstat.setString(1, name);
-						
 					}
 				}while(flag);
 				do {
 					flag = false;
 					System.out.println("请输入性别:男/女");
 					sex = scan.nextLine();
-					scan.nextLine();
-					if(!sex.equals("男")||!sex.equals("女")) {
+					if(!sex.equals("男")&&!sex.equals("女")) {
 						System.out.println("输入错误,请重新输入:");
 						flag = true;
-					}else {
-						//pstat.setInt(2, sex);
 					}
 				}while(flag);
 				do {
@@ -58,8 +55,6 @@ public class Addstuinfo{
 					if(age <1&&age >99) {
 						System.out.println("输入错误,请重新输入:");
 						flag = true;
-					}else {
-						//pstat.setInt(3, age);
 					}
 				}while(flag);
 				do {
@@ -69,18 +64,30 @@ public class Addstuinfo{
 					if(!phoneid.trim().matches("^(13|15|18|17)\\d{9}$")) {
 						System.out.println("输入错误,请重新输入:");
 						flag = true;
-					}else {
-						//pstat.setString(4, phoneid);
 					}
 				}while(flag);
-				Students stu = new Students();
 				SQLexecute<Students> sq = new SQLexecute<Students>();
-				int rows=sq.executeModify(conn, sql,name,sex,age,phoneid);
-				boolean f = pstat.execute();
-				if(f) {
-					System.out.println("有结果集");
+				int rows=sq.executeModify(conn,sql,name,sex,age,phoneid);
+				if(rows<0) {
+					System.out.println("添加失败");
 				}else {
-					System.out.println("添加成功,影响:"+pstat.getUpdateCount()+"行");
+					System.out.println("添加成功,影响:"+rows+"行");
+					String sqlclass = 
+							"insert into score(`existence`)values(?)";
+					SQLexecute<Score> sqq = new SQLexecute<Score>();
+					int row=sqq.executeModify(conn, sqlclass,1);
+					if(row>0) {
+						System.out.println("添加成功");
+					}else {
+						System.out.println("失败");
+					}
+					System.out.println("任意键选择课程");
+					String i = scan.nextLine();
+					if(i.equals("")) {
+						AddScore.addscore();
+					}else{
+						AddScore.addscore();
+					}
 				}
 			}
 		}catch(Exception e) {

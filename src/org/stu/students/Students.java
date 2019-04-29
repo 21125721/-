@@ -1,6 +1,6 @@
 package org.stu.students;
 /**
- * 学生对象
+ * 封装学生对象
  */
 import java.io.Serializable;
 
@@ -20,7 +20,8 @@ public class Students implements Serializable{
 	private String phoneid;
 	@Override
 	public String toString() {
-		return stuid+"\t"+name+"\t"+sex+"\t"+age+"\t"+phoneid;
+		return "||  "+stuid+"\t"+name+"\t"+sex+"         "+age+
+				"   "+phoneid+"  ||";
 	}
 	public String getName() {
 		return name;
